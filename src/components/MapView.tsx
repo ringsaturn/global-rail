@@ -31,6 +31,10 @@ const PROTOMAPS_LANGUAGE: Record<Language, string> = {
   ja: "ja",
   en: "en",
 };
+const PROTOMAPS_STYLE_THEME: Record<ResolvedTheme, string> = {
+  dark: "dark",
+  light: "white",
+};
 
 const REMOVE_LAYER_IDS = new Set([
   "pois",
@@ -145,7 +149,7 @@ function protomapsStyleUrl(
   language: Language,
 ): string | null {
   if (!PROTOMAPS_KEY) return null;
-  return `https://api.protomaps.com/styles/v5/${theme}/${PROTOMAPS_LANGUAGE[language]}.json?key=${PROTOMAPS_KEY}`;
+  return `https://api.protomaps.com/styles/v5/${PROTOMAPS_STYLE_THEME[theme]}/${PROTOMAPS_LANGUAGE[language]}.json?key=${PROTOMAPS_KEY}`;
 }
 
 function emptyStyle(theme: ResolvedTheme): maplibregl.StyleSpecification {
