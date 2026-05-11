@@ -9,6 +9,7 @@ const TEXT = {
     theme: "主题",
     auto: "自动",
     dark: "深色",
+    white: "白色",
     light: "浅色",
     language: "语言",
     languages: {
@@ -22,6 +23,7 @@ const TEXT = {
     theme: "テーマ",
     auto: "自動",
     dark: "ダーク",
+    white: "ホワイト",
     light: "ライト",
     language: "言語",
     languages: {
@@ -35,6 +37,7 @@ const TEXT = {
     theme: "Theme",
     auto: "Auto",
     dark: "Dark",
+    white: "White",
     light: "Light",
     language: "Language",
     languages: {
@@ -45,13 +48,13 @@ const TEXT = {
   },
 } as const;
 
-const THEMES: Theme[] = ["auto", "dark", "light"];
+const THEMES: Theme[] = ["auto", "dark", "white", "light"];
 const LANGUAGES: Language[] = ["zh", "ja", "en"];
 
 function getSystemTheme(): ResolvedTheme {
   if (typeof window === "undefined") return "dark";
   return window.matchMedia("(prefers-color-scheme: light)").matches
-    ? "light"
+    ? "white"
     : "dark";
 }
 
@@ -61,18 +64,19 @@ export default function App() {
   const [language, setLanguage] = useState<Language>("zh");
   const text = TEXT[language];
   const resolvedTheme = theme === "auto" ? systemTheme : theme;
+  const appThemeClass = resolvedTheme === "dark" ? "app-dark" : "app-light";
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-color-scheme: light)");
     const updateSystemTheme = () =>
-      setSystemTheme(media.matches ? "light" : "dark");
+      setSystemTheme(media.matches ? "white" : "dark");
     updateSystemTheme();
     media.addEventListener("change", updateSystemTheme);
     return () => media.removeEventListener("change", updateSystemTheme);
   }, []);
 
   return (
-    <div className={`app app-${resolvedTheme}`}>
+    <div className={`app ${appThemeClass}`}>
       <header className="app-header">
         <div className="brand-block">
           <h1>Global Rail</h1>

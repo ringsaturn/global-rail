@@ -33,7 +33,8 @@ const PROTOMAPS_LANGUAGE: Record<Language, string> = {
 };
 const PROTOMAPS_STYLE_THEME: Record<ResolvedTheme, string> = {
   dark: "dark",
-  light: "white",
+  white: "white",
+  light: "light",
 };
 
 const REMOVE_LAYER_IDS = new Set([
@@ -94,6 +95,14 @@ const THEME_COLORS = {
     stationStroke: "#252a2f",
     text: "#eef2f5",
     halo: "#0c0f12",
+  },
+  white: {
+    background: "#f8f9f7",
+    lineFallback: "#56616c",
+    stationFill: "#182029",
+    stationStroke: "#ffffff",
+    text: "#17212b",
+    halo: "#ffffff",
   },
   light: {
     background: "#f3f5f1",
