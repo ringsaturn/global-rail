@@ -1,0 +1,1 @@
+set -a; source .env.local; set +a; AWS_ACCESS_KEY_ID="$R2_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$R2_SECRET_ACCESS_KEY" AWS_EC2_METADATA_DISABLED=true aws s3 cp public/global_rail.pmtiles "s3://$R2_BUCKET/pmtiles/global_rail.pmtiles" --endpoint-url "$R2_ENDPOINT" --region auto --content-type application/vnd.pmtiles --only-show-errors

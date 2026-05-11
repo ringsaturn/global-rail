@@ -8,7 +8,20 @@ https://dataset.ringsaturn.me/pmtiles/global_rail.pmtiles
 
 不保证数据的可用性、准确性、稳定性和更新频率。
 
-数据处理脚本过于混乱，暂时不公开。
+## 数据处理
+
+前置准备，需要安装：
+
+- uv
+- tippecanoe
+- aws-cli: 上传到 R2 的 S3 兼容对象存储
+
+```bash
+SOURCE_DIR=./data/2026-04-15.0/transportation uv run scripts/build_global_rail_pmtiles.py
+
+# 参考 .env.exmaple 配置 R2 开头的环境变量
+bash upload.sh
+```
 
 ## 许可证
 
