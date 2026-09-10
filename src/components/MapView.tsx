@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
+import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Protocol } from "pmtiles";
 import { defaultRailFilter } from "../types/rail-filter";
@@ -7,6 +8,11 @@ import type { RailFilterState } from "../types/rail-filter";
 import type { Language, ResolvedTheme } from "../types/settings";
 import { buildRailFilterExpr } from "../utils/rail-filter-expr";
 import RailFilterPanel from "./RailFilterPanel";
+
+// maplibre-gl v6 loads its worker as a separate ESM file resolved from
+// import.meta.url, which does not exist next to a bundled chunk. Point it at
+// the worker bundle Vite emits, otherwise no source is ever parsed.
+maplibregl.setWorkerUrl(maplibreWorkerUrl);
 
 const pmtilesProtocol = new Protocol();
 maplibregl.addProtocol("pmtiles", pmtilesProtocol.tile.bind(pmtilesProtocol));
